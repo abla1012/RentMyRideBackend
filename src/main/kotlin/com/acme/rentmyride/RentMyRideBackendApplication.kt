@@ -7,7 +7,7 @@ import org.springframework.boot.runApplication
 class RentMyRideBackendApplication
 
 fun main(args: Array<String>) {
-	runApplication<RentMyRideBackendApplication>(*args)
+    runApplication<RentMyRideBackendApplication>(*args)
 }
 
 

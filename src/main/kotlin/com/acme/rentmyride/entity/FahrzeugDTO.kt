@@ -11,4 +11,4 @@ data class FahrzeugDTO(
     val anzahlSitze: Int,
     val preisProTag: BigDecimal,
     val bestizer_fk: Int,
-    )
+)

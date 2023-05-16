@@ -4,7 +4,6 @@ import com.acme.rentmyride.datasource.FahrzeugDataSource
 import com.acme.rentmyride.entity.Fahrzeug
 import com.acme.rentmyride.entity.FahrzeugDTO
 import com.acme.rentmyride.entity.KategorieTyp
-import org.apache.tomcat.util.http.fileupload.FileUtils
 import org.springframework.stereotype.Repository
 import java.io.File
 import java.math.BigDecimal
@@ -14,7 +13,8 @@ import java.util.*
 //@Repository for classes that are responsible for retrieving data and storing data
 @Repository
 class MockFahrzeugDataSource : FahrzeugDataSource {
-    val bildpfad = "C:/Users/hpqtu/Downloads/Projekt_ebusiness/rentMyRideBackend/rentmyride/src/main/resources/porsche-model.png"
+    val bildpfad =
+        "src/main/resources/porsche-model.png"
 
     var fileContent: ByteArray = File(bildpfad).readBytes()
     var encodedString = Base64.getEncoder().encodeToString(fileContent)

@@ -10,7 +10,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api/fahrzeuge")
-class FahrzeugWriteController(private val service : FahrzeugWriteService) {
+class FahrzeugWriteController(private val service: FahrzeugWriteService) {
 
     /* Wenn man Validierung macht wiift der service die illegal argument exception
      @ExceptionHandler(IllegalArgumentException::class)
@@ -19,22 +19,21 @@ class FahrzeugWriteController(private val service : FahrzeugWriteService) {
      */
 
     @ExceptionHandler(NoSuchElementException::class)
-    fun handleNotFOund(e: NoSuchElementException) : ResponseEntity<String> =
+    fun handleNotFOund(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
 
     @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO) : UUID {
+    fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO): UUID {
         return service.addFahrzeug(fahrzeug)
     }
 
     @DeleteMapping("/{fahrzeugnummer}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteFahrzeug(@PathVariable fahrzeugnummer : String) : Unit {
+    fun deleteFahrzeug(@PathVariable fahrzeugnummer: String) {
         return service.deleteFahrzeug(fahrzeugnummer)
     }
-
 
 
 }

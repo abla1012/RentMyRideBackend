@@ -1,6 +1,5 @@
 package com.acme.rentmyride.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import java.math.BigDecimal
 import java.util.UUID
 
@@ -37,12 +36,12 @@ data class Fahrzeug(
      * @param beschreibung Ein transientes FahrzeugObjekt mit den neuen Werten für die Properties
     @Suppress("DataClassContainsFunctions")
     fun set(neu: Fahrzeug) {
-        beschreibung = neu.beschreibung
-        bild = neu.bild
-        kilometerstand = neu.kilometerstand
-        erstzulassung = neu.erstzulassung
-        fahrzeugtyp = neu.fahrzeugtyp
-        fahrzeughalter = neu.fahrzeughalter
+    beschreibung = neu.beschreibung
+    bild = neu.bild
+    kilometerstand = neu.kilometerstand
+    erstzulassung = neu.erstzulassung
+    fahrzeugtyp = neu.fahrzeugtyp
+    fahrzeughalter = neu.fahrzeughalter
     }
-    */
+     */
 }

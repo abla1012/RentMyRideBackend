@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class FahrzeugWriteService(private val dataSource : FahrzeugDataSource) {
-    fun addFahrzeug(fahrzeug: FahrzeugDTO) : UUID {
+class FahrzeugWriteService(private val dataSource: FahrzeugDataSource) {
+    fun addFahrzeug(fahrzeug: FahrzeugDTO): UUID {
 
         //hier normalerweise validierung
         /* z.B: Nur kein Fashrzeug mit gleicher beschreibung -> getFahrzeugByBeschreibung müsste man dann impelemtieren
@@ -20,7 +20,7 @@ class FahrzeugWriteService(private val dataSource : FahrzeugDataSource) {
         return dataSource.addFahrzeug(fahrzeug)
     }
 
-    fun deleteFahrzeug(fahrzeugnummer : String) : Unit {
+    fun deleteFahrzeug(fahrzeugnummer: String) {
         return dataSource.deleteFahrzeug(fahrzeugnummer)
     }
 }
