@@ -1,0 +1,21 @@
+// Ein neues Fahrzeug anlegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+
+< data/fahrzeug-neu.json
+
+###
+
+// Einen neuen Fahrzeug mit ungueltigen Daten versuchen anzulegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+
+< data/fahrzeug-neu-invalid.json
+
+###
+
+// Einen neuen Fahrzeug mit ungueltigem Passwort versuchen anzulegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+
+< data/fahrzeug-neu-invalid-password.json

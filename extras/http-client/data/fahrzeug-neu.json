@@ -1,0 +1,10 @@
+{
+  "beschreibung": "Neu Supercar",
+  "kategorie": "P",
+  "anzahlTueren": 52,
+  "hatKlimaanlage": true,
+  "anzahlSitze": 5,
+  "preisProTag": 24.5,
+  "bestizer_fk": 6,
+  "bild" : "bild codiert als base64String"
+}
