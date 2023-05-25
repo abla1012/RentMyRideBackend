@@ -1,6 +1,7 @@
 package com.acme.rentmyride.restController
 
 import com.acme.rentmyride.entity.Fahrzeug
+import com.acme.rentmyride.restController.FahrzeugGetController.Companion.API_PATH
 import com.acme.rentmyride.service.FahrzeugReadService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/fahrzeuge")
+@RequestMapping(API_PATH)
 class FahrzeugGetController(private val service: FahrzeugReadService) {
 
     @ExceptionHandler(NoSuchElementException::class)
@@ -26,5 +27,9 @@ class FahrzeugGetController(private val service: FahrzeugReadService) {
     @GetMapping("/{fahrzeugnummer}")
     fun getFahrzeug(@PathVariable fahrzeugnummer: String): Fahrzeug {
         return service.getFahrzeug(fahrzeugnummer)
+    }
+
+    companion object {
+        const val API_PATH = "/api/fahrzeuge"
     }
 }
