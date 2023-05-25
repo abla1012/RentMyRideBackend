@@ -1,5 +1,6 @@
 package com.acme.rentmyride.restController
 
+import com.acme.rentmyride.entity.Fahrzeug
 import com.acme.rentmyride.entity.FahrzeugDTO
 import com.acme.rentmyride.restController.FahrzeugGetController.Companion.API_PATH
 import com.acme.rentmyride.service.FahrzeugWriteService
@@ -23,18 +24,24 @@ class FahrzeugWriteController(private val service: FahrzeugWriteService) {
     fun handleNotFound(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
+    /*
+        @PostMapping(consumes = [APPLICATION_JSON_VALUE])
+        @ResponseStatus(HttpStatus.CREATED)
+        fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO): UUID {
+            return service.addFahrzeug(fahrzeug)
+        }
 
+     */
     @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO): UUID {
+    fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO): Collection<Fahrzeug> {
         return service.addFahrzeug(fahrzeug)
     }
 
     @DeleteMapping("/{fahrzeugnummer}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteFahrzeug(@PathVariable fahrzeugnummer: String) {
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteFahrzeug(@PathVariable fahrzeugnummer: String): Collection<Fahrzeug> {
         return service.deleteFahrzeug(fahrzeugnummer)
     }
-
-
 }

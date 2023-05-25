@@ -67,6 +67,14 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
         return fahrzeuge
     }
 
+    override fun getFahrzeugeOrderByBeschreibung(): Collection<Fahrzeug> {
+        return fahrzeuge.sortedBy { it.beschreibung }
+    }
+
+    override fun getFahrzeugeOrderByPreis(): Collection<Fahrzeug> {
+        return fahrzeuge.sortedBy { it.preisProTag }
+    }
+
     override fun getFahrzeug(fahrzeugnummer: String): Fahrzeug {
         for (f in fahrzeuge) {
             if (UUID.fromString(fahrzeugnummer) == f.fahrzeugnummer)
@@ -75,7 +83,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
         throw NoSuchElementException("Kein Fahrzeug mit der Fahrzeugnummer $fahrzeugnummer gefunden.")
     }
 
-    override fun addFahrzeug(fahrzeug: FahrzeugDTO): UUID {
+    override fun addFahrzeug(fahrzeug: FahrzeugDTO): Collection<Fahrzeug> {
         val neuesFahrzeug = Fahrzeug(
             fahrzeugnummer = UUID.randomUUID(),
             beschreibung = fahrzeug.beschreibung,
@@ -88,15 +96,16 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             bild = fahrzeug.bild
         )
         fahrzeuge.add(neuesFahrzeug)
-        return neuesFahrzeug.fahrzeugnummer
+        return fahrzeuge
     }
 
-    override fun deleteFahrzeug(fahrzeugnummer: String) {
+    override fun deleteFahrzeug(fahrzeugnummer: String): Collection<Fahrzeug> {
         val fahrzeugnummerUUID = UUID.fromString(fahrzeugnummer)
         val fahrzeug = fahrzeuge.firstOrNull { it.fahrzeugnummer == fahrzeugnummerUUID }
             ?: throw NoSuchElementException("Kein Fahrzeug mit dieser Fahrzeugnummer vorhanden")
 
         fahrzeuge.remove(fahrzeug)
+        return fahrzeuge
     }
 
 
