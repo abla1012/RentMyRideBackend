@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType.TEXT_PLAIN_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.naming.AuthenticationException
 
 
 @RestController
@@ -18,8 +17,8 @@ class AuthController(private val service: UserValidator) {
 
     /**
      * "Einloggen" bei _Basic Authentication_.
-     * @param username= admin
-     * @param passwort= p
+     * @param name= admin
+     * @param password= p
      * @return Response mit der Collection der Rollen oder Statuscode 401.
      */
     @PostMapping(produces = [TEXT_PLAIN_VALUE])

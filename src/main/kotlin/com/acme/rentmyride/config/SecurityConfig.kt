@@ -1,7 +1,6 @@
 package com.acme.rentmyride.config
 
 import com.acme.rentmyride.restController.FahrzeugGetController.Companion.API_PATH
-import com.acme.rentmyride.security.AuthController
 import com.acme.rentmyride.security.AuthController.Companion.AUTH_PATH
 import org.apache.catalina.webresources.TomcatURLStreamHandlerFactory.disable
 import org.springframework.context.annotation.Bean
@@ -42,7 +41,7 @@ class SecurityConfig {
                 authorize(DELETE, fahrzeugIdPath, permitAll)
 
                 // Login
-                authorize(POST, "$AUTH_PATH", permitAll)
+                authorize(POST, AUTH_PATH, permitAll)
 
                 // private endpoints nur mit PW zugänglich!
                 authorize(anyRequest, permitAll)
