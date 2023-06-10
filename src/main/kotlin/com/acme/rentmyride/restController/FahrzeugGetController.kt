@@ -3,6 +3,7 @@ package com.acme.rentmyride.restController
 import com.acme.rentmyride.entity.Fahrzeug
 import com.acme.rentmyride.restController.FahrzeugGetController.Companion.API_PATH
 import com.acme.rentmyride.service.FahrzeugReadService
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.util.MultiValueMap
@@ -17,17 +18,21 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(API_PATH)
 class FahrzeugGetController(private val service: FahrzeugReadService) {
 
+    private val logger = LoggerFactory.getLogger(FahrzeugGetController.javaClass)
     @ExceptionHandler(NoSuchElementException::class)
     fun handleNotFOund(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
     @GetMapping
     fun getFahrzeuge( @RequestParam queryParams: MultiValueMap<String, String>): Collection<Fahrzeug> {
+        //logger.debug("Hallo: QueryParams: ${queryParams.toString()}")
+        logger.info("Hallo: QueryParams: ${queryParams.toString()}")
         return service.getFahrzeuge(queryParams)
     }
 
     @GetMapping("/{fahrzeugnummer}")
     fun getFahrzeug(@PathVariable fahrzeugnummer: String): Fahrzeug {
+        logger.info("Hallo: QueryParams: ${fahrzeugnummer.toString()}")
         return service.getFahrzeug(fahrzeugnummer)
     }
 
