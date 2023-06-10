@@ -60,7 +60,30 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             preisProTag = BigDecimal(72),
             bestizer_fk = 2,
             bild = encodedString
+        ),
+        Fahrzeug(
+            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000003"),
+            beschreibung = "Zprinter",
+            kategorie = KategorieTyp.NUTZFAHRZEUG,
+            anzahlTueren = 4,
+            anzahlSitze = 3,
+            hatKlimaanlage = true,
+            preisProTag = BigDecimal(1),
+            bestizer_fk = 2,
+            bild = encodedString
+        ),
+        Fahrzeug(
+            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000004"),
+            beschreibung = "Bus",
+            kategorie = KategorieTyp.NUTZFAHRZEUG,
+            anzahlTueren = 4,
+            anzahlSitze = 3,
+            hatKlimaanlage = true,
+            preisProTag = BigDecimal(722),
+            bestizer_fk = 2,
+            bild = encodedString
         )
+
     )
 
     override fun getFahrzeuge(): Collection<Fahrzeug> {
