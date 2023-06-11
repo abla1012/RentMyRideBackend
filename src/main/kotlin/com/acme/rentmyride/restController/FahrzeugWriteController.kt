@@ -37,7 +37,7 @@ class FahrzeugWriteController(private val service: FahrzeugWriteService) {
     @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun addFahrzeug(@RequestBody fahrzeug: Fahrzeug): String {
-        logger.info("addFahrzeug mit ${fahrzeug.toString()}")
+        logger.warn("addFahrzeug() Fahrzeug: -> ${fahrzeug} erfolgreich hinzugefügt!")
         return service.addFahrzeug(fahrzeug)
     }
 
@@ -45,7 +45,7 @@ class FahrzeugWriteController(private val service: FahrzeugWriteService) {
     //@ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun deleteFahrzeug(@PathVariable id: Int): String {
-        logger.info("deleteFahrzeug mit ${id.toString()}")
+        logger.warn("deleteFahrzeug mit der id ${id.toString()}")
         return service.deleteFahrzeug(id)
     }
 }
