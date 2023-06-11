@@ -1,7 +1,6 @@
 package com.acme.rentmyride.restController
 
 import com.acme.rentmyride.entity.Fahrzeug
-import com.acme.rentmyride.entity.FahrzeugDTO
 import com.acme.rentmyride.restController.FahrzeugGetController.Companion.API_PATH
 import com.acme.rentmyride.service.FahrzeugWriteService
 import org.slf4j.LoggerFactory
@@ -15,7 +14,7 @@ import java.util.*
 @RequestMapping(API_PATH)
 class FahrzeugWriteController(private val service: FahrzeugWriteService) {
 
-    private val logger = LoggerFactory.getLogger(FahrzeugGetController.javaClass)
+    private val logger = LoggerFactory.getLogger(FahrzeugGetController::class.java)
 
     /* Wenn man Validierung macht wiift der service die illegal argument exception
      @ExceptionHandler(IllegalArgumentException::class)
@@ -37,16 +36,16 @@ class FahrzeugWriteController(private val service: FahrzeugWriteService) {
      */
     @PostMapping(consumes = [APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun addFahrzeug(@RequestBody fahrzeug: FahrzeugDTO): Collection<Fahrzeug> {
+    fun addFahrzeug(@RequestBody fahrzeug: Fahrzeug): String {
         logger.info("addFahrzeug mit ${fahrzeug.toString()}")
         return service.addFahrzeug(fahrzeug)
     }
 
-    @DeleteMapping("/{fahrzeugnummer}")
+    @DeleteMapping("/{id}")
     //@ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    fun deleteFahrzeug(@PathVariable fahrzeugnummer: String): Collection<Fahrzeug> {
-        logger.info("deleteFahrzeug mit ${fahrzeugnummer.toString()}")
-        return service.deleteFahrzeug(fahrzeugnummer)
+    fun deleteFahrzeug(@PathVariable id: Int): String {
+        logger.info("deleteFahrzeug mit ${id.toString()}")
+        return service.deleteFahrzeug(id)
     }
 }

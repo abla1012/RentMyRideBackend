@@ -14,14 +14,19 @@ class FahrzeugReadService(private val dataSource: FahrzeugDataSource) {
         }
 
         if (suchkriterien.size == 1) {
-            val beschreibung = suchkriterien["beschreibung"]
-            if (beschreibung?.size == 1) {
-                return dataSource.getFahrzeugeOrderByBeschreibung()
+            val marke = suchkriterien["marke"]
+            if (marke?.size == 1) {
+                return dataSource.getFahrzeugeOrderByMarke()
             }
 
-            val preis = suchkriterien["preis"]
-            if (preis?.size == 1) {
-                return dataSource.getFahrzeugeOrderByPreis()
+            val name = suchkriterien["name"]
+            if (name?.size == 1) {
+                return dataSource.getFahrzeugeOrderByName()
+            }
+
+            val ps = suchkriterien["ps"]
+            if (ps?.size == 1) {
+                return dataSource.getFahrzeugeOrderByPs()
             }
         }
 
@@ -33,7 +38,7 @@ class FahrzeugReadService(private val dataSource: FahrzeugDataSource) {
     }
 
 
-    fun getFahrzeug(fahrzeugnummer: String): Fahrzeug {
-        return dataSource.getFahrzeug(fahrzeugnummer)
+    fun getFahrzeug(id: Int): Fahrzeug {
+        return dataSource.getFahrzeug(id)
     }
 }

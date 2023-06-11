@@ -2,11 +2,8 @@ package com.acme.rentmyride.datasource.mock
 
 import com.acme.rentmyride.datasource.FahrzeugDataSource
 import com.acme.rentmyride.entity.Fahrzeug
-import com.acme.rentmyride.entity.FahrzeugDTO
-import com.acme.rentmyride.entity.KategorieTyp
 import org.springframework.stereotype.Repository
 import java.io.File
-import java.math.BigDecimal
 import java.util.*
 
 
@@ -29,106 +26,108 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
 
     val fahrzeuge = mutableListOf(
         Fahrzeug(
-            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000000"),
-            beschreibung = "Auto1",
-            kategorie = KategorieTyp.PKW,
-            anzahlTueren = 3,
-            anzahlSitze = 4,
-            hatKlimaanlage = true,
-            preisProTag = BigDecimal(12),
-            bestizer_fk = 1,
-            bild = encodedString,
+            marke = "BMW",
+            name = "M1 Power",
+            ps = 205,
+            preis = 120,
+            standort = "Karlsruhe",
+            ausstattung = "sehr gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = encodedString,
+            id = 0
         ),
         Fahrzeug(
-            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-            beschreibung = "Auto2",
-            kategorie = KategorieTyp.PKW,
-            anzahlTueren = 5,
-            anzahlSitze = 5,
-            hatKlimaanlage = true,
-            preisProTag = BigDecimal(51),
-            bestizer_fk = 1,
-            bild = encodedString
+            marke = "Porsche",
+            name = "911",
+            ps = 605,
+            preis = 1220,
+            standort = "Karlsruhe",
+            ausstattung = "sehr gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = encodedString,
+            id = 1
         ),
         Fahrzeug(
-            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000002"),
-            beschreibung = "Sprinter",
-            kategorie = KategorieTyp.NUTZFAHRZEUG,
-            anzahlTueren = 4,
-            anzahlSitze = 3,
-            hatKlimaanlage = true,
-            preisProTag = BigDecimal(72),
-            bestizer_fk = 2,
-            bild = encodedString
+            marke = "Benz",
+            name = "C63 AMG",
+            ps = 305,
+            preis = 300,
+            standort = "Karlsruhe",
+            ausstattung = "sehr gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = encodedString,
+            id = 2
         ),
         Fahrzeug(
-            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000003"),
-            beschreibung = "Zprinter",
-            kategorie = KategorieTyp.NUTZFAHRZEUG,
-            anzahlTueren = 4,
-            anzahlSitze = 3,
-            hatKlimaanlage = true,
-            preisProTag = BigDecimal(1),
-            bestizer_fk = 2,
-            bild = encodedString
+            marke = "Fiat",
+            name = "Punto",
+            ps = 99,
+            preis = 12,
+            standort = "Karlsruhe",
+            ausstattung = "sehr gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = encodedString,
+            id = 3
         ),
         Fahrzeug(
-            fahrzeugnummer = UUID.fromString("00000000-0000-0000-0000-000000000004"),
-            beschreibung = "Bus",
-            kategorie = KategorieTyp.NUTZFAHRZEUG,
-            anzahlTueren = 4,
-            anzahlSitze = 3,
-            hatKlimaanlage = true,
-            preisProTag = BigDecimal(722),
-            bestizer_fk = 2,
-            bild = encodedString
+            marke = "Dacia",
+            name = "M",
+            ps = 5,
+            preis = 120,
+            standort = "Karlsruhe",
+            ausstattung = "gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = encodedString,
+            id = 4
         )
-
     )
-
     override fun getFahrzeuge(): Collection<Fahrzeug> {
         return fahrzeuge
     }
 
-    override fun getFahrzeugeOrderByBeschreibung(): Collection<Fahrzeug> {
-        return fahrzeuge.sortedBy { it.beschreibung }
+    override fun getFahrzeugeOrderByMarke(): Collection<Fahrzeug> {
+        return fahrzeuge.sortedBy { it.marke }
     }
 
-    override fun getFahrzeugeOrderByPreis(): Collection<Fahrzeug> {
-        return fahrzeuge.sortedBy { it.preisProTag }
+    override fun getFahrzeugeOrderByName(): Collection<Fahrzeug> {
+        return fahrzeuge.sortedBy { it.name }
     }
 
-    override fun getFahrzeug(fahrzeugnummer: String): Fahrzeug {
+    override fun getFahrzeugeOrderByPs(): Collection<Fahrzeug> {
+        return fahrzeuge.sortedBy { it.ps }
+    }
+
+    override fun getFahrzeug(id: Int): Fahrzeug {
         for (f in fahrzeuge) {
-            if (UUID.fromString(fahrzeugnummer) == f.fahrzeugnummer)
+            if (id == f.id)
                 return f
         }
-        throw NoSuchElementException("Kein Fahrzeug mit der Fahrzeugnummer $fahrzeugnummer gefunden.")
+        throw NoSuchElementException("Kein Fahrzeug mit der Fahrzeugnummer $id gefunden.")
     }
 
-    override fun addFahrzeug(fahrzeug: FahrzeugDTO): Collection<Fahrzeug> {
+    override fun addFahrzeug(fahrzeug: Fahrzeug): String {
         val neuesFahrzeug = Fahrzeug(
-            fahrzeugnummer = UUID.randomUUID(),
-            beschreibung = fahrzeug.beschreibung,
-            kategorie = fahrzeug.kategorie,
-            anzahlTueren = fahrzeug.anzahlTueren,
-            anzahlSitze = fahrzeug.anzahlSitze,
-            hatKlimaanlage = fahrzeug.hatKlimaanlage,
-            preisProTag = fahrzeug.preisProTag,
-            bestizer_fk = fahrzeug.bestizer_fk,
-            bild = fahrzeug.bild
+            marke = fahrzeug.marke,
+            name = fahrzeug.name,
+            ps = fahrzeug.ps,
+            preis = fahrzeug.preis,
+            standort = fahrzeug.standort,
+            ausstattung = fahrzeug.ausstattung,
+            zeitraum = fahrzeug.zeitraum,
+            fotoURL = fahrzeug.fotoURL,
+            id = fahrzeuge.size
         )
         fahrzeuge.add(neuesFahrzeug)
-        return fahrzeuge
+        return neuesFahrzeug.id.toString()
     }
 
-    override fun deleteFahrzeug(fahrzeugnummer: String): Collection<Fahrzeug> {
-        val fahrzeugnummerUUID = UUID.fromString(fahrzeugnummer)
-        val fahrzeug = fahrzeuge.firstOrNull { it.fahrzeugnummer == fahrzeugnummerUUID }
+    override fun deleteFahrzeug(id: Int): String {
+        val fahrzeug = fahrzeuge.firstOrNull { it.id == id }
             ?: throw NoSuchElementException("Kein Fahrzeug mit dieser Fahrzeugnummer vorhanden")
 
         fahrzeuge.remove(fahrzeug)
-        return fahrzeuge
+
+        return "ok Brudi"
     }
 
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(API_PATH)
 class FahrzeugGetController(private val service: FahrzeugReadService) {
 
-    private val logger = LoggerFactory.getLogger(FahrzeugGetController.javaClass)
+    private val logger = LoggerFactory.getLogger(FahrzeugGetController::class.java)
     @ExceptionHandler(NoSuchElementException::class)
     fun handleNotFOund(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
@@ -30,10 +30,10 @@ class FahrzeugGetController(private val service: FahrzeugReadService) {
         return service.getFahrzeuge(queryParams)
     }
 
-    @GetMapping("/{fahrzeugnummer}")
-    fun getFahrzeug(@PathVariable fahrzeugnummer: String): Fahrzeug {
-        logger.info("Hallo: QueryParams: ${fahrzeugnummer.toString()}")
-        return service.getFahrzeug(fahrzeugnummer)
+    @GetMapping("/{id}")
+    fun getFahrzeug(@PathVariable id: Int): Fahrzeug {
+        logger.info("Hallo: QueryParams: ${id.toString()}")
+        return service.getFahrzeug(id)
     }
 
     companion object {

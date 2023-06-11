@@ -4,11 +4,10 @@ import com.acme.rentmyride.datasource.FahrzeugDataSource
 import com.acme.rentmyride.entity.Fahrzeug
 import com.acme.rentmyride.entity.FahrzeugDTO
 import org.springframework.stereotype.Service
-import org.springframework.util.MultiValueMap
 
 @Service
 class FahrzeugWriteService(private val dataSource: FahrzeugDataSource, private val readService: FahrzeugReadService) {
-    fun addFahrzeug(fahrzeug: FahrzeugDTO): Collection<Fahrzeug> {
+    fun addFahrzeug(fahrzeug: Fahrzeug): String {
 
         //hier normalerweise validierung
         /* z.B: Nur kein Fashrzeug mit gleicher beschreibung -> getFahrzeugByBeschreibung müsste man dann impelemtieren
@@ -17,14 +16,10 @@ class FahrzeugWriteService(private val dataSource: FahrzeugDataSource, private v
             throw IllegalArgumentException("Fahrzeug mit der Beschreibung ${fahrzeug.beschreibung} Beschreibung bereits vorhanden")
         }
          */
-        dataSource.addFahrzeug(fahrzeug)
-
-        return readService.getFahrzeuge()
+        return dataSource.addFahrzeug(fahrzeug)
     }
 
-    fun deleteFahrzeug(fahrzeugnummer: String): Collection<Fahrzeug>  {
-        dataSource.deleteFahrzeug(fahrzeugnummer)
-
-        return readService.getFahrzeuge()
+    fun deleteFahrzeug(id: Int): String  {
+        return dataSource.deleteFahrzeug(id)
     }
 }
