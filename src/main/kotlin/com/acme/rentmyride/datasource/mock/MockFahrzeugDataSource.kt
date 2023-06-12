@@ -34,7 +34,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             ausstattung = "sehr gut",
             zeitraum = "30.06.2023 - 14.07.2023",
             fotoURL = encodedString,
-            id = 5
+            id = 0
         ),
         Fahrzeug(
             marke = "Porsche",
