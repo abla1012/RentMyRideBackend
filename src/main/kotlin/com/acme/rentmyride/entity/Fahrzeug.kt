@@ -1,5 +1,6 @@
 package com.acme.rentmyride.entity
 
+// Fahrzeug Entity Klasse
 data class Fahrzeug(
     val marke: String,
     val name: String,

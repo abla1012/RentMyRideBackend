@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+// RestController Klasse für das entgegennehmen der Schreib - Requests und deligieren an den Service und dann Antwort an den Client mit entspechenden Daten
 @RestController
 @RequestMapping(API_PATH)
 class FahrzeugWriteController(private val service: FahrzeugWriteService) {

@@ -2,6 +2,7 @@ package com.acme.rentmyride.datasource
 
 import com.acme.rentmyride.entity.Fahrzeug
 
+// Interface für die Repositorys
 interface FahrzeugDataSource {
     fun getFahrzeuge(): Collection<Fahrzeug>
 

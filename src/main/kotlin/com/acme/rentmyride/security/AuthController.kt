@@ -6,6 +6,7 @@ import org.springframework.http.MediaType.TEXT_PLAIN_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+// Controller Klasse für das einloggen über die Rest-Schnittstelle
 
 @RestController
 @RequestMapping("$AUTH_PATH")

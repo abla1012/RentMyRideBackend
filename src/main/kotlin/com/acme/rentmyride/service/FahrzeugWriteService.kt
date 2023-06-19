@@ -4,6 +4,7 @@ import com.acme.rentmyride.datasource.FahrzeugDataSource
 import com.acme.rentmyride.entity.Fahrzeug
 import org.springframework.stereotype.Service
 
+// Service Klasse um gewünschte Daten aus dem Repository zu holen und ggf umformatieren und Validieren
 @Service
 class FahrzeugWriteService(private val dataSource: FahrzeugDataSource, private val readService: FahrzeugReadService) {
     fun addFahrzeug(fahrzeug: Fahrzeug): String {

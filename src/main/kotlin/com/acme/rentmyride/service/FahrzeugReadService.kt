@@ -5,9 +5,9 @@ import com.acme.rentmyride.entity.Fahrzeug
 import org.springframework.stereotype.Service
 import org.springframework.util.MultiValueMap
 
+// Service Klasse um gewünschte Daten aus dem Repository zu holen und ggf umformatieren und Validieren
 @Service
 class FahrzeugReadService(private val dataSource: FahrzeugDataSource) {
-
     fun getFahrzeuge(suchkriterien: MultiValueMap<String, String>): Collection<Fahrzeug> {
         if (suchkriterien.isEmpty()) {
             return dataSource.getFahrzeuge()

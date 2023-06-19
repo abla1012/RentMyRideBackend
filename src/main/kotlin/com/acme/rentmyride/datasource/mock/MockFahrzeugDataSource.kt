@@ -7,7 +7,8 @@ import java.io.File
 import java.util.*
 
 
-//@Repository for classes that are responsible for retrieving data and storing data
+// @Repository für Klassen, die für das Abrufen von Daten und das Speichern von Daten zuständig sind
+// Mock Klasse die für das Abrufen von Daten und das Speichern von Daten zuständig sind
 @Repository
 class MockFahrzeugDataSource : FahrzeugDataSource {
     val bildpfad =

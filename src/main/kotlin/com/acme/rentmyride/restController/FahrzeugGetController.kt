@@ -14,25 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
+// RestController Klasse für das entgegennehmen der GET Requests und deligieren an den Service und dann Antwort an den Client mit entspechenden Daten
 @RestController
 @RequestMapping(API_PATH)
 class FahrzeugGetController(private val service: FahrzeugReadService) {
 
     private val logger = LoggerFactory.getLogger(FahrzeugGetController::class.java)
+
     @ExceptionHandler(NoSuchElementException::class)
     fun handleNotFOund(e: NoSuchElementException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
     @GetMapping
-    fun getFahrzeuge( @RequestParam queryParams: MultiValueMap<String, String>): Collection<Fahrzeug> {
-        //logger.debug("Hallo: QueryParams: ${queryParams.toString()}")
-        logger.info("Hallo: QueryParams: ${queryParams.toString()}")
+    fun getFahrzeuge(@RequestParam queryParams: MultiValueMap<String, String>): Collection<Fahrzeug> {
+        //logger.debug("Hallo: QueryParams: ${queryParams}")
+        logger.info("Hallo: QueryParams: ${queryParams}")
         return service.getFahrzeuge(queryParams)
     }
 
     @GetMapping("/{id}")
     fun getFahrzeug(@PathVariable id: Int): Fahrzeug {
-        logger.info("Hallo: QueryParams: ${id.toString()}")
+        logger.info("Hallo: QueryParams: ${id}")
         return service.getFahrzeug(id)
     }
 
