@@ -1,7 +1,6 @@
 package com.acme.rentmyride.restController
 
-import com.acme.rentmyride.entity.FahrzeugDTO
-import com.acme.rentmyride.entity.KategorieTyp
+import com.acme.rentmyride.entity.Fahrzeug
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
-import java.math.BigDecimal
 
 //SpringBootTest ist ein integration test (baut die gesamte Anwendung)
 @SpringBootTest
@@ -38,14 +36,14 @@ class FahrzeugControllerTest(
             .andDo{ print() }
             .andExpect{
                 status { isOk() }
-                jsonPath("$[1].beschreibung") { value("Auto2")}
+                jsonPath("$[1].marke") { value("Porsche")}
             }
     }
 
     @Test
-    fun `should return Fahrzeug with the specific UUID`() {
+    fun `should return Fahrzeug with the specific ID`() {
         //given
-        val fahrzeugnummer = "00000000-0000-0000-0000-000000000000"
+        val fahrzeugnummer = "1"
 
         //when / then
         mockMvc.get("/api/fahrzeuge/$fahrzeugnummer")
@@ -56,9 +54,9 @@ class FahrzeugControllerTest(
     }
 
     @Test
-    fun `should not find Fahrzeug with the specific UUID`() {
+    fun `should not find Fahrzeug with the specific ID`() {
         //given
-        val fahrzeugnummer = "90000000-0000-0000-0000-000000000000"
+        val fahrzeugnummer = "99"
 
         //when / then
         mockMvc.get("/api/fahrzeuge/$fahrzeugnummer")
@@ -75,15 +73,16 @@ class FahrzeugControllerTest(
         @Test
         fun `should add a new Fahrzeug`() {
             //given
-            val newFahrzeug = FahrzeugDTO(
-                beschreibung = "Auto1",
-                kategorie = KategorieTyp.PKW,
-                anzahlTueren = 3,
-                anzahlSitze =4,
-                hatKlimaanlage = true,
-                preisProTag = BigDecimal(12),
-                bestizer_fk = 1,
-                bild = "neues Bild"
+            val newFahrzeug = Fahrzeug(
+                marke = "BMW",
+                name = "M1 Power",
+                ps = 205,
+                preis = 120,
+                standort = "Karlsruhe",
+                ausstattung = "sehr gut",
+                zeitraum = "30.06.2023 - 14.07.2023",
+                fotoURL = "encodedString",
+                id = 5
             )
             
             //when /then

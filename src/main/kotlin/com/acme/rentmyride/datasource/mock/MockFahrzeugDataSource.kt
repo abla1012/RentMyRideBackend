@@ -13,6 +13,8 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
     val bildpfad =
         "src/main/resources/porsche-model.png"
 
+
+    // Bild convertieren in Bytes und dann als string umwandeln
     var fileContent: ByteArray = File(bildpfad).readBytes()
     var encodedString = Base64.getEncoder().encodeToString(fileContent)
 

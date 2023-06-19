@@ -2,7 +2,6 @@ package com.acme.rentmyride.service
 
 import com.acme.rentmyride.datasource.FahrzeugDataSource
 import com.acme.rentmyride.entity.Fahrzeug
-import com.acme.rentmyride.entity.FahrzeugDTO
 import org.springframework.stereotype.Service
 
 @Service
