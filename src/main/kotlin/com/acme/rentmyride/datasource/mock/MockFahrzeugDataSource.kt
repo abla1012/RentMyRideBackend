@@ -6,18 +6,23 @@ import org.springframework.stereotype.Repository
 import java.io.File
 import java.util.*
 
+// Mock Klasse die für das Abrufen von Daten und das Speichern von Daten zuständig ist
 
-// @Repository für Klassen, die für das Abrufen von Daten und das Speichern von Daten zuständig sind
-// Mock Klasse die für das Abrufen von Daten und das Speichern von Daten zuständig sind
 @Repository
+// @Repository für Klassen, die für das Abrufen von Daten und das Speichern von Daten zuständig sind
 class MockFahrzeugDataSource : FahrzeugDataSource {
-    val bildpfad =
-        "src/main/resources/porsche-model.png"
+    val bildpfadPorsche = "src/main/resources/porsche-model.png"
+    val bildpfadBMW = "src/main/resources/BmwM1.jpg"
+    val bildpfadC63 = "src/main/resources/c63amg.jpg"
+    val bildpfadDacia = "src/main/resources/Dacia.jpg"
+    val bildpfadFiat = "src/main/resources/FiatPunto.JPG"
 
 
     // Bild convertieren in Bytes und dann als string umwandeln
-    var fileContent: ByteArray = File(bildpfad).readBytes()
-    var encodedString = Base64.getEncoder().encodeToString(fileContent)
+    private fun converPicture(bildpfad: String): String {
+        val fileContent: ByteArray = File(bildpfad).readBytes()
+        return Base64.getEncoder().encodeToString(fileContent)
+    }
 
     // im frontent zum decoden
     /*
@@ -27,6 +32,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
     */
 
 
+    // Mockdaten
     val fahrzeuge = mutableListOf(
         Fahrzeug(
             marke = "BMW",
@@ -36,7 +42,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             standort = "Karlsruhe",
             ausstattung = "sehr gut",
             zeitraum = "30.06.2023 - 14.07.2023",
-            fotoURL = encodedString,
+            fotoURL = converPicture(bildpfadBMW),
             id = 5
         ),
         Fahrzeug(
@@ -47,7 +53,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             standort = "Karlsruhe",
             ausstattung = "sehr gut",
             zeitraum = "30.06.2023 - 14.07.2023",
-            fotoURL = encodedString,
+            fotoURL = converPicture(bildpfadPorsche),
             id = 1
         ),
         Fahrzeug(
@@ -58,7 +64,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             standort = "Karlsruhe",
             ausstattung = "sehr gut",
             zeitraum = "30.06.2023 - 14.07.2023",
-            fotoURL = encodedString,
+            fotoURL = converPicture(bildpfadC63),
             id = 2
         ),
         Fahrzeug(
@@ -69,7 +75,7 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             standort = "Karlsruhe",
             ausstattung = "sehr gut",
             zeitraum = "30.06.2023 - 14.07.2023",
-            fotoURL = encodedString,
+            fotoURL = converPicture(bildpfadFiat),
             id = 3
         ),
         Fahrzeug(
@@ -80,10 +86,23 @@ class MockFahrzeugDataSource : FahrzeugDataSource {
             standort = "Karlsruhe",
             ausstattung = "gut",
             zeitraum = "30.06.2023 - 14.07.2023",
-            fotoURL = encodedString,
+            fotoURL = converPicture(bildpfadDacia),
+            id = 4
+        ),
+        Fahrzeug(
+            marke = "Unbekannt",
+            name = "Unbekannt",
+            ps = 555,
+            preis = 999,
+            standort = "Karlsruhe",
+            ausstattung = "gut",
+            zeitraum = "30.06.2023 - 14.07.2023",
+            fotoURL = "Unbekannt",
             id = 4
         )
     )
+
+    // Mock funktionen für das laden, speichern und löschen der Daten aus dem Repository
     override fun getFahrzeuge(): Collection<Fahrzeug> {
         return fahrzeuge
     }
